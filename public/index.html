@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nithra Calendar Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        button {
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #d4f4e7;
+        }
+
+        /* Typing animation */
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            background-color: gray;
+            border-radius: 50%;
+            animation: typing 1.5s infinite ease-in-out;
+        }
+        .dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 100% {
+                opacity: 0.2;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-3px);
+            }
+        }
+
+        /* Blink animation for the loading message */
+        .blink {
+            animation: blink 1s steps(5, start) infinite;
+        }
+
+        @keyframes blink {
+            to {
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white flex flex-col h-screen">
+    <header class="bg-white p-4 shadow-md flex items-center">
+        <button class="text-green-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </button>
+        <h1 class="text-green-600 text-xl font-bold ml-2">நித்ரா காலண்டர்</h1>
+        <span class="ml-auto text-gray-500 text-sm">24×7 HELP & SUPPORT</span>
+    </header>
+    <div class="chat-container flex flex-col flex-grow overflow-y-auto p-4">
+        <div id="loading-message" class="p-4 text-green-600 text-center hidden">
+
+        </div>
+        <div id="chat-box" class="flex flex-col space-y-4"></div>
+    </div>
+    <div class="p-4 flex">
+        <input type="text" id="user-input" placeholder="Type your problem..." class="flex-grow border rounded-full p-2 mr-2">
+        <button id="send-btn" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">Send</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

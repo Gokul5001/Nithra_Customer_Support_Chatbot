@@ -1,0 +1,52 @@
+{
+  "intents": {
+    "Account": {
+      "questions": [
+        "Account Action"
+      ],
+      "answers": [
+        "" 
+      ]
+    },
+    "Complaint": {
+      "questions": [
+        "பயன்பாட்டை பற்றி புகார்"
+      ],
+      "answers": [
+        "உங்கள் புகாரை எங்களிடம் தெரிவிக்க உங்கள் பெயர் மற்றும் WhatsApp உடன் இணைக்கப்பட்ட  மொபைல் எண்ணை உள்ளிடவும் (எ.கா: பெயர், மொபைல் எண்)"
+      ]
+    },
+    "NameAndNumber": {
+      "questions": [
+        "<user_name>,<user_mobile>"
+      ],
+      "answers": [
+        "பகிர்ந்தமைக்கு நன்றி, எங்கள் வாடிக்கையாளர் விரைவில் உங்களைத் தொடர்புகொள்வார்."
+      ]
+    },
+    "Jathagam": {
+      "questions": [
+        "ஜாதகம் பார்க்க"
+      ],
+      "answers": [
+        "நீங்கள் விரும்புவதை நாங்கள் புரிந்துகொள்கிறோம், உங்கள் ஜாதகத்தை பதிவிறக்க. கீழே உள்ள இணைப்பைக் கிளிக் செய்யவும் </br> <a href='https://nithramatrimony.net/' target='_blank' class='text-red-500 underline'>Download Jathagam</a>"
+      ]
+    },
+    "Matrimony_Registration": {
+      "questions": [
+        "மேட்ரிமோனியில் பதிவு செய்ய"
+      ],
+      "answers": [
+        "நீங்கள் விரும்புவதை நாங்கள் புரிந்துகொள்கிறோம், உங்கள் ஜாதகத்தை பதிவிறக்கவும்"
+      ]
+    },
+    "Spiritual": {
+      "questions": [
+        "ஆன்மிகம் சார்ந்த"
+      ],
+      "answers": [
+        "ஆன்மிக தகவல்களைப் பெற, இங்கு கிளிக் செய்யவும் </br> <a href='https://nithramatrimony.net/spiritual' target='_blank' class='text-red-500 underline'>ஆன்மிகம்</a>"
+      ]
+    }
+  }
+}

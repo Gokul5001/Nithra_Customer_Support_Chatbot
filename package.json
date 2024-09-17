@@ -1,0 +1,19 @@
+{
+  "name": "chatbot_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "train": "node train.js",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "moment-timezone": "^0.5.45",
+    "mysql": "^2.18.1",
+    "node-nlp": "^4.27.0"
+  }
+}

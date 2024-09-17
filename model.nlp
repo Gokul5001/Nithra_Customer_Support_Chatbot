@@ -1,0 +1,438 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ],
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp",
+    "executeActionsBeforeAnswers": false,
+    "calculateSentiment": true
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager"
+    },
+    "locales": [
+      "en"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "locale": "en",
+          "trainByDomain": false,
+          "tag": "domain-manager-en",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "account,action": {
+            "intent": "Account",
+            "domain": "default"
+          },
+          "பயன்பாட்டை,பற்றி,புகார்": {
+            "intent": "Complaint",
+            "domain": "default"
+          },
+          "<user_mobile>,<user_name>": {
+            "intent": "NameAndNumber",
+            "domain": "default"
+          },
+          "ஜாதகம்,பார்க்க": {
+            "intent": "Jathagam",
+            "domain": "default"
+          },
+          "செய்ய,பதிவு,மேட்ரிமோனியில்": {
+            "intent": "Matrimony_Registration",
+            "domain": "default"
+          },
+          "ஆன்மிகம்,சார்ந்த": {
+            "intent": "Spiritual",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "Account": "default",
+          "Complaint": "default",
+          "NameAndNumber": "default",
+          "Jathagam": "default",
+          "Matrimony_Registration": "default",
+          "Spiritual": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "Account Action",
+            "intent": "Account"
+          },
+          {
+            "domain": "default",
+            "utterance": "பயன்பாட்டை பற்றி புகார்",
+            "intent": "Complaint"
+          },
+          {
+            "domain": "default",
+            "utterance": "<user_name>,<user_mobile>",
+            "intent": "NameAndNumber"
+          },
+          {
+            "domain": "default",
+            "utterance": "ஜாதகம் பார்க்க",
+            "intent": "Jathagam"
+          },
+          {
+            "domain": "default",
+            "utterance": "மேட்ரிமோனியில் பதிவு செய்ய",
+            "intent": "Matrimony_Registration"
+          },
+          {
+            "domain": "default",
+            "utterance": "ஆன்மிகம் சார்ந்த",
+            "intent": "Spiritual"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "en",
+              "tag": "nlu-en",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "account": 1,
+              "action": 1,
+              "பயன்பாட்டை": 1,
+              "பற்றி": 1,
+              "புகார்": 1,
+              "<user_name>": 1,
+              "<user_mobile>": 1,
+              "ஜாதகம்": 1,
+              "பார்க்க": 1,
+              "மேட்ரிமோனியில்": 1,
+              "பதிவு": 1,
+              "செய்ய": 1,
+              "ஆன்மிகம்": 1,
+              "சார்ந்த": 1
+            },
+            "intents": {
+              "Account": 1,
+              "Complaint": 1,
+              "NameAndNumber": 1,
+              "Jathagam": 1,
+              "Matrimony_Registration": 1,
+              "Spiritual": 1
+            },
+            "intentFeatures": {
+              "Account": {
+                "account": 1,
+                "action": 1
+              },
+              "Complaint": {
+                "பயன்பாட்டை": 1,
+                "பற்றி": 1,
+                "புகார்": 1
+              },
+              "NameAndNumber": {
+                "<user_name>": 1,
+                "<user_mobile>": 1
+              },
+              "Jathagam": {
+                "ஜாதகம்": 1,
+                "பார்க்க": 1
+              },
+              "Matrimony_Registration": {
+                "மேட்ரிமோனியில்": 1,
+                "பதிவு": 1,
+                "செய்ய": 1
+              },
+              "Spiritual": {
+                "ஆன்மிகம்": 1,
+                "சார்ந்த": 1
+              }
+            },
+            "featuresToIntent": {
+              "account": [
+                "Account"
+              ],
+              "action": [
+                "Account"
+              ],
+              "பயன்பாட்டை": [
+                "Complaint"
+              ],
+              "பற்றி": [
+                "Complaint"
+              ],
+              "புகார்": [
+                "Complaint"
+              ],
+              "<user_name>": [
+                "NameAndNumber"
+              ],
+              "<user_mobile>": [
+                "NameAndNumber"
+              ],
+              "ஜாதகம்": [
+                "Jathagam"
+              ],
+              "பார்க்க": [
+                "Jathagam"
+              ],
+              "மேட்ரிமோனியில்": [
+                "Matrimony_Registration"
+              ],
+              "பதிவு": [
+                "Matrimony_Registration"
+              ],
+              "செய்ய": [
+                "Matrimony_Registration"
+              ],
+              "ஆன்மிகம்": [
+                "Spiritual"
+              ],
+              "சார்ந்த": [
+                "Spiritual"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "locale": "en",
+                "tag": "nlu-en",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "account",
+                "action",
+                "பயன்பாட்டை",
+                "பற்றி",
+                "புகார்",
+                "<user_name>",
+                "<user_mobile>",
+                "ஜாதகம்",
+                "பார்க்க",
+                "மேட்ரிமோனியில்",
+                "பதிவு",
+                "செய்ய",
+                "ஆன்மிகம்",
+                "சார்ந்த"
+              ],
+              "intents": [
+                "Account",
+                "Complaint",
+                "NameAndNumber",
+                "Jathagam",
+                "Matrimony_Registration",
+                "Spiritual"
+              ],
+              "perceptrons": [
+                [
+                  6.286063194274902,
+                  6.286063194274902,
+                  -0.5149575471878052,
+                  -0.5149575471878052,
+                  -0.5149575471878052,
+                  -0.744088351726532,
+                  -0.744088351726532,
+                  -0.7381359338760376,
+                  -0.7381359338760376,
+                  -0.5101359486579895,
+                  -0.5101359486579895,
+                  -0.5101359486579895,
+                  -0.7291653752326965,
+                  -0.7291653752326965,
+                  1.5239670996624821
+                ],
+                [
+                  -0.503486156463623,
+                  -0.503486156463623,
+                  4.438007831573486,
+                  4.438007831573486,
+                  4.438007831573486,
+                  -0.514851450920105,
+                  -0.514851450920105,
+                  -0.5114344358444214,
+                  -0.5114344358444214,
+                  -0.36774420738220215,
+                  -0.36774420738220215,
+                  -0.36774420738220215,
+                  -0.5050034523010254,
+                  -0.5050034523010254,
+                  1.002582162684554
+                ],
+                [
+                  -0.7226645350456238,
+                  -0.7226645350456238,
+                  -0.5067274570465088,
+                  -0.5067274570465088,
+                  -0.5067274570465088,
+                  6.2859015464782715,
+                  6.2859015464782715,
+                  -0.7467191815376282,
+                  -0.7467191815376282,
+                  -0.5119197964668274,
+                  -0.5119197964668274,
+                  -0.5119197964668274,
+                  -0.7383841276168823,
+                  -0.7383841276168823,
+                  1.5288200049402978
+                ],
+                [
+                  -0.7297101020812988,
+                  -0.7297101020812988,
+                  -0.5101408958435059,
+                  -0.5101408958435059,
+                  -0.5101408958435059,
+                  -0.7189874649047852,
+                  -0.7189874649047852,
+                  6.286013603210449,
+                  6.286013603210449,
+                  -0.5150185227394104,
+                  -0.5150185227394104,
+                  -0.5150185227394104,
+                  -0.744138240814209,
+                  -0.744138240814209,
+                  1.5306098630888145
+                ],
+                [
+                  -0.5113441944122314,
+                  -0.5113441944122314,
+                  -0.3676716387271881,
+                  -0.3676716387271881,
+                  -0.3676716387271881,
+                  -0.504923403263092,
+                  -0.504923403263092,
+                  -0.5035191774368286,
+                  -0.5035191774368286,
+                  4.437992572784424,
+                  4.437992572784424,
+                  4.437992572784424,
+                  -0.5149139761924744,
+                  -0.5149139761924744,
+                  1.0026165669252847
+                ],
+                [
+                  -0.739965558052063,
+                  -0.739965558052063,
+                  -0.5119022130966187,
+                  -0.5119022130966187,
+                  -0.5119022130966187,
+                  -0.7298886775970459,
+                  -0.7298886775970459,
+                  -0.7227140665054321,
+                  -0.7227140665054321,
+                  -0.5067525506019592,
+                  -0.5067525506019592,
+                  -0.5067525506019592,
+                  6.2858500480651855,
+                  6.2858500480651855,
+                  1.5340407144458008
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "en",
+        "Account Action"
+      ],
+      [
+        "en",
+        "பயன்பாட்டை பற்றி புகார்"
+      ],
+      [
+        "en",
+        "<user_name>,<user_mobile>"
+      ],
+      [
+        "en",
+        "ஜாதகம் பார்க்க"
+      ],
+      [
+        "en",
+        "மேட்ரிமோனியில் பதிவு செய்ய"
+      ],
+      [
+        "en",
+        "ஆன்மிகம் சார்ந்த"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {
+      "en": {
+        "Account": [
+          {
+            "answer": ""
+          }
+        ],
+        "Complaint": [
+          {
+            "answer": "உங்கள் புகாரை எங்களிடம் தெரிவிக்க உங்கள் பெயர் மற்றும் WhatsApp உடன் இணைக்கப்பட்ட  மொபைல் எண்ணை உள்ளிடவும் (எ.கா: பெயர், மொபைல் எண்)"
+          }
+        ],
+        "NameAndNumber": [
+          {
+            "answer": "பகிர்ந்தமைக்கு நன்றி, எங்கள் வாடிக்கையாளர் விரைவில் உங்களைத் தொடர்புகொள்வார்."
+          }
+        ],
+        "Jathagam": [
+          {
+            "answer": "நீங்கள் விரும்புவதை நாங்கள் புரிந்துகொள்கிறோம், உங்கள் ஜாதகத்தை பதிவிறக்க. கீழே உள்ள இணைப்பைக் கிளிக் செய்யவும் </br> <a href='https://nithramatrimony.net/' target='_blank' class='text-red-500 underline'>Download Jathagam</a>"
+          }
+        ],
+        "Matrimony_Registration": [
+          {
+            "answer": "நீங்கள் விரும்புவதை நாங்கள் புரிந்துகொள்கிறோம், உங்கள் ஜாதகத்தை பதிவிறக்கவும்"
+          }
+        ],
+        "Spiritual": [
+          {
+            "answer": "ஆன்மிக தகவல்களைப் பெற, இங்கு கிளிக் செய்யவும் </br> <a href='https://nithramatrimony.net/spiritual' target='_blank' class='text-red-500 underline'>ஆன்மிகம்</a>"
+          }
+        ]
+      }
+    }
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}
