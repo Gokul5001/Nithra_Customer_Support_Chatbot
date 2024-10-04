@@ -397,7 +397,7 @@
       "en": {
         "Account": [
           {
-            "answer": ""
+            "answer": "The reply will be dynamically provided based on your account status."
           }
         ],
         "Complaint": [

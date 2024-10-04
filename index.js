@@ -6,7 +6,7 @@ const dotenv=require('dotenv');
 const moment = require('moment-timezone');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 // MySQL connection for the database
 const db = mysql.createConnection({
@@ -26,66 +26,74 @@ db.connect((err) => {
 
 const manager = new NlpManager({ languages: ["en"] });
 manager.load();
-
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
-app.post("/chat", async (req, res) => {
-    const { message } = req.body;
-
-    // Check if the message is "Account Action"
+app.get("/chat", async (req, res) => {
+    const { message } = req.query;
+    const deviceId = req.query.deviceid;
+    console.log('Device ID from query:', deviceId); // Log device ID for debugging
     if (message === "Account Action") {
-        // Extract device ID from request headers or parameters
-        const deviceId = req.headers['deviceid']; // Assuming device ID is sent in headers
-        
         if (deviceId) {
-            // Check if the device ID is in the registration table
-            const query = "SELECT COUNT(*) AS count FROM registration WHERE device_id = ?";
+            const query = "SELECT COUNT(*) AS count FROM registration WHERE deviceid = ?";
             db.query(query, [deviceId], (err, results) => {
                 if (err) {
                     console.error('Error querying database:', err);
                     return res.status(500).json({ reply: "An error occurred. Please try again later." });
                 }
 
-                const isRegistered = results[0].count > 0;
-                const reply = isRegistered
-                    ? "You are already registered. Thank you for using our app."
-                    : "You are not registered. Please register using the following link: <a href='https://nithramatrimony.net/register' target='_blank' class='text-red-500 underline'>Register</a>";
+                if (results && results[0].count !== undefined) {
+                    const isRegistered = results[0].count > 0;
+                    let reply;
 
-                res.json({ reply });
+                    if (isRegistered) {
+                        reply = "உங்கள் கணக்கு ஏற்கனவே பதிவு செய்யப்பட்டுள்ளது. எங்கள் பயன்பாட்டைப் பயன்படுத்தியதற்கு நன்றி";
+                    } else {
+                        reply = "உங்கள் கணக்கு பதிவு செய்யப்படவில்லை. பின்வரும் இணைப்பைப் பயன்படுத்தி பதிவு செய்யவும் <a href='https://nithramatrimony.net/register' target='_blank' class='text-red-500 underline'>Register</a>";
+                    }
+
+                    return res.json({ reply });
+                } else {
+                    return res.status(500).json({ reply: "An error occurred while checking registration." });
+                }
             });
         } else {
-            res.status(400).json({ reply: "Device ID is missing." });
+            return res.status(400).json({ reply: "Device ID is missing." });
         }
     } else {
-        // Check if the message is in the format for name and mobile number
-        const nameAndNumberPattern = /^([^,]+),(\d+)$/;
-        const match = message.match(nameAndNumberPattern);
-
-        if (match) {
-            const userName = match[1].trim();
-            const userMobile = match[2].trim();
-
-            // Get the current time in IST (Indian Standard Time)
-            const createdAtIST = moment().tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
-
-            // Store the name, mobile number, and timestamp in the database
-            const query = "INSERT INTO mobile_numbers (name, mobile, created_at) VALUES (?, ?, ?)";
-            db.query(query, [userName, userMobile, createdAtIST], (err) => {
-                if (err) {
-                    console.error('Error inserting data:', err);
-                    return res.status(500).json({ reply: "அமைப்புப் பிழை ஏற்பட்டது" });
-                }
-                res.json({ reply: "பகிர்ந்தமைக்கு நன்றி, எங்கள் வாடிக்கையாளர் விரைவில் உங்களைத் தொடர்புகொள்வார்." });
-            });
-        } else {
-            // Process other messages with NLP
-            const response = await manager.process("en", message);
-            res.json({ reply: response.answer });
-        }
+        return res.status(400).json({ reply: "Invalid request. Use 'Account Action' as the message." });
     }
 });
 
-app.listen(port, () => {
-    console.log(`Chatbot running at http://localhost:${port}`);
+// Handle name, mobile, and other NLP messages via POST request
+app.post("/chat", async (req, res) => {
+    const { message } = req.body;
+    // Check if the message is in the format for name and mobile number
+    const nameAndNumberPattern = /^([^,]+),(\d+)$/;
+    const match = message.match(nameAndNumberPattern);
+    if (match) {
+        const userName = match[1].trim();
+        const userMobile = match[2].trim();
+        // Get the current time in IST (Indian Standard Time)
+        const createdAtIST = moment().tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
+        // Store the name, mobile number, and timestamp in the database
+        const query = "INSERT INTO mobile_numbers (name, mobile, created_at) VALUES (?, ?, ?)";
+        db.query(query, [userName, userMobile, createdAtIST], (err) => {
+            if (err) {
+                console.error('Error inserting data:', err);
+                return res.status(500).json({ reply: "அமைப்புப் பிழை ஏற்பட்டது" });
+            }
+            res.json({ reply: "பகிர்ந்தமைக்கு நன்றி, எங்கள் வாடிக்கையாளர் விரைவில் உங்களைத் தொடர்புகொள்வார்." });
+        });
+    } else {
+        // Process other messages with NLP
+        const response = await manager.process("en", message);
+        res.json({ reply: response.answer });
+    }
 });
+
+app.listen(port, '192.168.58.91', () => {
+    console.log(`Chatbot running at http://192.168.58.91:${port}`);
+});
+
+

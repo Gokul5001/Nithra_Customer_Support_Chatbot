@@ -5,7 +5,7 @@
         "Account Action"
       ],
       "answers": [
-        "" 
+        "The reply will be dynamically provided based on your account status."
       ]
     },
     "Complaint": {

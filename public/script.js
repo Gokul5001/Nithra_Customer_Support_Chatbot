@@ -84,19 +84,26 @@ function displayTypingAnimation(sender, callback) {
 
 function handleOption(option) {
     appendMessage(option, "user");
+
+    // Extract deviceid from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const deviceId = urlParams.get('deviceid');  // Extract deviceid dynamically
+
     displayTypingAnimation("bot", () => {
-        fetch("/chat", {
-            method: "POST",
+        const url = option === "Account Action" ? `/chat?message=${option}&deviceid=${deviceId}` : "/chat";  // Use dynamic deviceId
+
+        fetch(url, {
+            method: option === "Account Action" ? "GET" : "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ message: option })
+            body: option !== "Account Action" ? JSON.stringify({ message: option }) : null
         })
         .then(response => response.json())
         .then(data => {
             appendMessage(data.reply, "bot");
 
-            // Check if the bot's message is the one asking for name and mobile number
+            // Check if the bot's message is asking for name and mobile number
             if (data.reply.includes("உங்கள் புகாரை எங்களிடம் தெரிவிக்க உங்கள் பெயர் மற்றும் WhatsApp உடன் இணைக்கப்பட்ட  மொபைல் எண்ணை உள்ளிடவும் (எ.கா: பெயர், மொபைல் எண்")) {
                 showInputFieldAndButton(); // Show input field and button
             }
@@ -200,3 +207,6 @@ function formatTimestamp(date) {
         return `${date.toDateString()} ${time}`;
     }
 }
+
+
+
